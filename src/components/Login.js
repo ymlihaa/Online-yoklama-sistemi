@@ -34,12 +34,12 @@ class NormalLoginForm extends React.Component {
       if (!err) {
         const response = axios
           .post(
-            "http://ymk-api-1.us-east-2.elasticbeanstalk.com/login/user",
+            "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/login/user",
             model
           )
           .then(res => {
             console.log("res", res);
-            localStorage.setItem("Token", res.data.result);
+            localStorage.setItem("Token", res.data.result.jwt);
             if (res.data.result) {
               console.log("burada");
               return this.props.history.push("/result");
@@ -59,7 +59,7 @@ class NormalLoginForm extends React.Component {
 
     return (
       <div>
-        <Image width={480} heigth={480} path={Logo} />
+        <Image width={580} heigth={500} path={Logo} />
         <div className="form">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item className="input">

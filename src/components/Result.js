@@ -48,13 +48,13 @@ class Result extends Component {
             </h1>
           </div>
           <div className="text-center checkbox ">
-            <Checkbox onTableOpen={this.openTable} />
+            {/* <Checkbox onTableOpen={this.openTable} /> */}
           </div>
           {element}
           <div className="text-center">
             <button
               type="button"
-              class="btn btn-danger"
+              className="btn btn-danger"
               onClick={() => {
                 localStorage.removeItem("Token");
                 this.props.history.push("/");

@@ -1,58 +1,111 @@
-import React from "react";
+import React, { Component } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { Table } from "antd";
+import { Table, Button, Icon, Tooltip } from "antd";
+import { BrowserRouter } from "react-router-dom";
 
 const columns = [
-  { title: "Ders Adı", dataIndex: "ders_Name", key: "ders_Name" },
-  { title: "Öğrenci No", dataIndex: "ogr_No", key: "ogr_No" },
-  { title: "Öğrenci Adı", dataIndex: "ogr_Name", key: "ogr_Name" },
-  { title: "Devamsızlık Durumu", dataIndex: "dvm_State", key: "dvm_State" },
   {
-    title: "Düzenle",
+    title: "Ders Kodu",
+    dataIndex: "ders_Code",
+    key: "ders_Code"
+  },
+  {
+    title: "Ders Adı",
+    className: "link",
+    dataIndex: "ders_Name",
+    key: "ders_Name",
+    render: text => <Button type="link">{text}</Button>
+  },
+  {
+    title: "Şube",
+    dataIndex: "ders_Branch",
+    key: "ders_Branch"
+  },
+  {
+    title: "AKTS-Krd",
+    dataIndex: "ders_AKTSKrd",
+    key: "ders_AKTSKrd"
+  },
+  {
+    title: "T+U",
+    dataIndex: "ders_TU",
+    key: "ders_TU"
+  },
+  {
+    title: "Öğrenci Sayısı",
+    dataIndex: "ogr_Count",
+    key: "ogr_Count"
+  },
+  {
+    title: "İşlem",
     dataIndex: "",
-    key: "x",
-    render: () => <h1>Sil</h1>
+    key: "user_Action",
+    render: action => (
+      <div>
+        <Button type="primary" size="large">
+          <Icon
+            type="play-circle"
+            style={{ fontSize: "20px", marginBottom: "5px" }}
+          />
+          Yoklama Başlat
+        </Button>
+        <Tooltip placement="bottom" title="Yoklamayı durdur!">
+          <Button
+            type="danger"
+            shape="circle"
+            icon="pause-circle"
+            size="large"
+            style={{ marginLeft: "15px", paddingBottom: "10px" }}
+            disabled
+          />
+        </Tooltip>
+      </div>
+    )
   }
 ];
 
 const data = [
   {
     key: 1,
-    ders_Name: "YMGK",
-    ogr_No: 16541067,
-    ogr_Name: "HASAN YEMLİHA KESKİN",
-    dvm_State: "DEVAM DURUMU",
-    dvm_Count: 3
+    ders_Code: "YMH459",
+    ders_Name: "Yazılım Müh. Güncel Konular",
+    ders_Branch: "1",
+    ders_AKTSKrd: "6-4",
+    ders_TU: "3+2",
+    ogr_Count: "60"
   },
   {
     key: 2,
-    ders_Name: "YMGK",
-    ogr_No: 16541067,
-    ogr_Name: "HASAN YEMLİHA KESKİN",
-    dvm_State: "DEVAM DURUMU",
-    dvm_Count: 3
+    ders_Code: "YMH315",
+    ders_Name: "Veritabanı Yönetim Sis.",
+    ders_Branch: "B",
+    ders_AKTSKrd: "6-4",
+    ders_TU: "3+2",
+    ogr_Count: "130"
   },
   {
     key: 3,
-    ders_Name: "YMGK",
-    ogr_No: 16541067,
-    ogr_Name: "HASAN YEMLİHA KESKİN",
-    dvm_State: "DEVAM DURUMU",
-    dvm_Count: 3
+    ders_Code: "YMH403",
+    ders_Name: "Girişimcilik-II",
+    ders_Branch: "1",
+    ders_AKTSKrd: "3-2",
+    ders_TU: "2+0",
+    ogr_Count: "55"
   }
 ];
 
-function Tablo() {
-  return (
-    <Table
-      columns={columns}
-      expandedRowRender={record => (
-        <p style={{ margin: 0 }}>
-          {record.dvm_State}: {record.dvm_Count}
-        </p>
-      )}
-      dataSource={data}
-    />
-  );
+class HomeTable extends Component {
+  render() {
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        bordered
+        title={() => "Aktif Dönemde Verilen Dersler"}
+        footer={() => "Toplam ders sayısı: " + data.length}
+      />
+    );
+  }
 }
-export default Tablo;
+
+export default HomeTable;
