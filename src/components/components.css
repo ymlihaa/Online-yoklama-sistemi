@@ -6,8 +6,6 @@
 }
 
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -27,20 +25,14 @@
   margin-left: auto;
 } */
 
-.image {
-  margin: 25px;
-}
-.checkbox {
-  margin-bottom: 30px;
-}
 .table {
-  margin-bottom: 30;
+  margin-bottom: 30px;
 }
 
 .main-container {
   margin: auto;
-  height: 990px;
-  width: 2300px;
+  height: 809px;
+  width: 1080px;
 }
 .container {
   display: inline;
