@@ -45,3 +45,7 @@
 .container {
   display: inline;
 }
+
+.login-button {
+  background-color: #7b241c !important;
+}

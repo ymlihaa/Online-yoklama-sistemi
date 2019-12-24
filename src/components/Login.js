@@ -98,7 +98,7 @@ class NormalLoginForm extends React.Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button input"
+                  className="login-form-button input login-button"
                   onClick={() => {
                     this.Validate();
                   }}

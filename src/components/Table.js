@@ -42,7 +42,7 @@ const columns = [
     key: "user_Action",
     render: action => (
       <div>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" className="login-button">
           <Icon
             type="play-circle"
             style={{ fontSize: "20px", marginBottom: "5px" }}
