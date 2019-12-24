@@ -10,7 +10,7 @@ import "./App.css";
 function Home() {
   return (
     <Router>
-      <div>
+      <div className="main-container-block">
         <Header />
 
         <div className="container">

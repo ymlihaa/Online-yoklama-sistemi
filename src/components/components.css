@@ -38,6 +38,24 @@
   display: inline;
 }
 
+.login-logo {
+  margin-top: 50px;
+}
+
 .login-button {
   background-color: #7b241c !important;
+}
+
+.loginBox {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  margin: auto;
+  height: 650px;
+  width: 390px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sub-loginBox {
+  margin: auto;
+  padding-top: 30px;
 }

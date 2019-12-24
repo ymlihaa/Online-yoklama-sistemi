@@ -28,12 +28,6 @@ h1 {
   margin-left: auto;
 }
 
-.loginBox {
-  margin: auto;
-  height: 790px;
-  width: 680px;
-}
-.sub-loginBox {
-  margin: auto;
-  border-radius: 30px;
+.main-container-block {
+  background-color: #d0d9e0;
 }

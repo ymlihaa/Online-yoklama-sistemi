@@ -1,6 +1,6 @@
 import React from "react";
 import "antd/dist/antd.css";
-import "../App.css";
+import "./components.css";
 import Image from "./Image";
 import Logo from "../logo.png";
 import { Form, Icon, Input, Button } from "antd";
@@ -59,54 +59,62 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <div className=" loginBox shadow-lg p-3 mb-5 bg-white rounded">
-        <div className="">
-          <Image width={580} heigth={500} path={Logo} />
-          <div className="form">
-            <Form onSubmit={this.handleSubmit} className="login-form">
-              <Form.Item className="input">
-                {getFieldDecorator("username", {
-                  rules: [
-                    { required: true, message: "Please input your username!" }
-                  ]
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="Username"
-                  />
-                )}
-              </Form.Item>
-              <Form.Item className="input">
-                {getFieldDecorator("password", {
-                  rules: [
-                    { required: true, message: "Please input your Password!" }
-                  ]
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    type="password"
-                    placeholder="Password"
-                  />
-                )}
-              </Form.Item>
+      <div>
+        <div className=" loginBox ">
+          <div className="sub-loginBox">
+            <Image width={350} height={300} path={Logo} />
+            <div className="form">
+              <Form onSubmit={this.handleSubmit} className="login-form">
+                <Form.Item className="input">
+                  {getFieldDecorator("username", {
+                    rules: [
+                      { required: true, message: "Please input your username!" }
+                    ]
+                  })(
+                    <Input
+                      prefix={
+                        <Icon
+                          type="user"
+                          style={{ color: "rgba(0,0,0,.25)" }}
+                        />
+                      }
+                      placeholder="Username"
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item className="input">
+                  {getFieldDecorator("password", {
+                    rules: [
+                      { required: true, message: "Please input your Password!" }
+                    ]
+                  })(
+                    <Input
+                      prefix={
+                        <Icon
+                          type="lock"
+                          style={{ color: "rgba(0,0,0,.25)" }}
+                        />
+                      }
+                      type="password"
+                      placeholder="Password"
+                    />
+                  )}
+                </Form.Item>
 
-              <Form.Item className="button">
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button input login-button"
-                  onClick={() => {
-                    this.Validate();
-                  }}
-                >
-                  Log in
-                </Button>
-              </Form.Item>
-            </Form>
+                <Form.Item className="button">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button input login-button"
+                    onClick={() => {
+                      this.Validate();
+                    }}
+                  >
+                    Log in
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
           </div>
         </div>
       </div>

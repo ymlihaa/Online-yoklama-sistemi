@@ -31,6 +31,8 @@ class Result extends Component {
     });
   }
 
+  // shadow-lg p-3 mb-5 bg-white rounded
+
   render() {
     const element =
       this.state.isTrue === true ? <Table /> : console.log("açma");

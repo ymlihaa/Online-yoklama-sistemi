@@ -8,7 +8,7 @@ function Image(props) {
         width={props.width}
         height={props.height}
         src={props.path}
-        className="rounded mx-auto d-block"
+        className=" rounded mx-auto d-block"
         alt="..."
       />
     </div>
