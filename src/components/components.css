@@ -11,7 +11,7 @@
   margin-right: auto;
   margin-left: auto;
 }
-
+/* 
 .main-header {
   position: relative;
   max-height: 100px;
@@ -25,7 +25,7 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-}
+} */
 
 .image {
   margin: 25px;
@@ -35,4 +35,13 @@
 }
 .table {
   margin-bottom: 30;
+}
+
+.main-container {
+  margin: auto;
+  height: 990px;
+  width: 2300px;
+}
+.container {
+  display: inline;
 }

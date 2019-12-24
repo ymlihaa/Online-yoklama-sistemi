@@ -5,7 +5,6 @@ import avatar from "../avatar.jpg";
 import Checkbox from "./Checkbox";
 import { withRouter } from "react-router-dom";
 import teachAvatar from "../teachAvatar.png";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class Result extends Component {
@@ -37,7 +36,7 @@ class Result extends Component {
       this.state.isTrue === true ? <Table /> : console.log("açma");
 
     return (
-      <div>
+      <div className="main-container shadow-lg p-3 mb-5 bg-white rounded">
         <div className="container">
           <div className="image">
             <Image width={200} path={200} path={teachAvatar} />

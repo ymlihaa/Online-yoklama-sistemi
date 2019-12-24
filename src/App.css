@@ -27,3 +27,13 @@ h1 {
   margin-right: auto;
   margin-left: auto;
 }
+
+.nizam {
+  margin: auto;
+  height: 890px;
+  width: 680px;
+}
+.subnizam {
+  margin: auto;
+  border-radius: 30px;
+}

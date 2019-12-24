@@ -7,19 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function Header() {
   return (
-    <div>
-      <PageHeader
-        className="header"
-        style={{
-          border: "1px solid rgb(235, 237, 240)"
-        }}
-        title={
-          <div>
-            <b>FIRAT</b> ÜNİVERSİTESİ
-          </div>
-        }
-      />
-    </div>
+    <PageHeader
+      className="header shadow-sm p-3 mb-5 bg-white rounded"
+      style={{
+        border: "1px solid rgb(235, 237, 240)"
+      }}
+      title={
+        <div>
+          <b>FIRAT</b> ÜNİVERSİTESİ
+        </div>
+      }
+    />
   );
 }
 export default Header;
