@@ -59,7 +59,7 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <div className=" nizam shadow-lg p-3 mb-5 bg-white rounded">
+      <div className=" loginBox shadow-lg p-3 mb-5 bg-white rounded">
         <div className="">
           <Image width={580} heigth={500} path={Logo} />
           <div className="form">

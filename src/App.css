@@ -28,12 +28,12 @@ h1 {
   margin-left: auto;
 }
 
-.nizam {
+.loginBox {
   margin: auto;
   height: 890px;
   width: 680px;
 }
-.subnizam {
+.sub-loginBox {
   margin: auto;
   border-radius: 30px;
 }
