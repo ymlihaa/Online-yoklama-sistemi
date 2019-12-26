@@ -44,8 +44,9 @@ class Result extends Component {
           <div className="image">
             <Image
               width={200}
-              path={200}
+              height={200}
               path={this.props.location.state.Url}
+              class={"image"}
             />
           </div>
           <div className=" checkbox ">

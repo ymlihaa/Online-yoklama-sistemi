@@ -68,3 +68,10 @@
   margin: auto;
   padding-top: 30px;
 }
+
+.image {
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
