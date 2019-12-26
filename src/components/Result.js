@@ -46,7 +46,7 @@ class Result extends Component {
               width={200}
               height={200}
               path={this.props.location.state.Url}
-              class={"image"}
+              class={" shadow-lg p-3 mb-5 bg-white rounded image"}
             />
           </div>
           <div className=" checkbox ">
