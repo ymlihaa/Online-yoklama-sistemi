@@ -6,6 +6,7 @@ import Checkbox from "./Checkbox";
 import { withRouter } from "react-router-dom";
 import teachAvatar from "../teachAvatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Alert } from "antd";
 
 class Result extends Component {
   constructor(props) {
@@ -37,15 +38,20 @@ class Result extends Component {
     const element =
       this.state.isTrue === true ? <Table /> : console.log("açma");
 
-    return (
+    return localStorage.getItem("Token") ? (
       <div className="main-container shadow-lg p-3 mb-5 bg-white rounded">
         <div className="container">
           <div className="image">
-            <Image width={200} path={200} path={teachAvatar} />
+            <Image
+              width={200}
+              path={200}
+              path={this.props.location.state.Url}
+            />
           </div>
           <div className=" checkbox ">
             <h1 className="text-center">
-              <b>Fatih Özkaynak</b>
+              {this.props.location.state.Name}{" "}
+              {this.props.location.state.Surname}{" "}
             </h1>
           </div>
           <div className="text-center checkbox ">
@@ -66,6 +72,13 @@ class Result extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <Alert
+        message="Error"
+        description="This is an error message about copywriting."
+        type="error"
+        showIcon
+      />
     );
   }
 }

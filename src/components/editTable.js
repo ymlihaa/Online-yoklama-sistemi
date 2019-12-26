@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Icon, Tooltip, Tag } from "antd";
+import { Table, Button, Icon, Tooltip, Tag, Alert } from "antd";
 
 import "antd/dist/antd.css";
 
@@ -151,7 +151,7 @@ class EditTable extends Component {
       }
     ];
 
-    return (
+    return localStorage.getItem("Token") ? (
       <Table
         columns={columns}
         dataSource={data}
@@ -160,6 +160,13 @@ class EditTable extends Component {
         footer={() =>
           "Yoklama listesinde ki imza sayısı: " + this.currentSatate(...data)
         }
+      />
+    ) : (
+      <Alert
+        message="Error"
+        description="This is an error message about copywriting."
+        type="error"
+        showIcon
       />
     );
   }

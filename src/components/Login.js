@@ -26,6 +26,8 @@ class NormalLoginForm extends React.Component {
     });
   };
 
+  navigate;
+
   Validate = () => {
     this.props.form.validateFields((err, values) => {
       const model = {
@@ -43,11 +45,12 @@ class NormalLoginForm extends React.Component {
             localStorage.setItem("Token", res.data.result.jwt);
             if (res.data.result) {
               console.log("burada");
-              return this.props.history.push("/result");
+              return this.props.history.push("/result", {
+                Url: res.data.result.userDTO.imageUrl,
+                Name: res.data.result.userDTO.name,
+                Surname: res.data.result.userDTO.surname
+              });
             }
-            // return res.data.suc
-            //   ? this.props.history.push("/result")
-            //   : this.openNotificationWithIcon("error");
           });
       } else {
         return this.openNotification("error");
@@ -59,10 +62,16 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     return (
-      <div>
+      <div className="login-container">
         <div className=" loginBox ">
           <div className="sub-loginBox">
-            <Image width={350} height={300} path={Logo} />
+            <Image
+              width={350}
+              height={300}
+              path={Logo}
+              class={"rounded mx-auto d-block"}
+            />
+
             <div className="form">
               <Form onSubmit={this.handleSubmit} className="login-form">
                 <Form.Item className="input">
