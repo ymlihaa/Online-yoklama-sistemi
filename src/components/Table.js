@@ -42,7 +42,12 @@ const columns = [
     key: "user_Action",
     render: action => (
       <div>
-        <Button type="primary" size="large" className="login-button">
+        <Button
+          type="primary"
+          size="large"
+          className="login-button"
+          onClick={event => (window.location.href = "/edit")}
+        >
           <Icon
             type="play-circle"
             style={{ fontSize: "20px", marginBottom: "5px" }}

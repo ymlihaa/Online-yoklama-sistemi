@@ -51,8 +51,8 @@ class Result extends Component {
           </div>
           <div className=" checkbox ">
             <h1 className="text-center">
-              {this.props.location.state.Name}{" "}
-              {this.props.location.state.Surname}{" "}
+              {this.props.location.state.Name.toUpperCase()}{" "}
+              {this.props.location.state.Surname.toUpperCase()}{" "}
             </h1>
           </div>
           <div className="text-center checkbox ">
