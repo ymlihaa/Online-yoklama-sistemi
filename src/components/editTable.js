@@ -153,6 +153,7 @@ class EditTable extends Component {
 
     return localStorage.getItem("Token") ? (
       <Table
+        className="shadow-lg p-3 mb-5 bg-white rounded Table"
         columns={columns}
         dataSource={data}
         bordered

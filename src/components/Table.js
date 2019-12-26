@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Table, Button, Icon, Tooltip } from "antd";
 import { BrowserRouter } from "react-router-dom";
+import "./components.css";
 
 const columns = [
   {
