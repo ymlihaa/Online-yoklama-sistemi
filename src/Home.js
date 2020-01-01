@@ -6,6 +6,7 @@ import EditTable from "./components/editTable";
 import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import QR from "./components/qrCode";
 
 function Home() {
   return (
@@ -18,10 +19,19 @@ function Home() {
             <Route path="/" exact component={Login} />
             <Route path="/result" component={Result} />
             <Route path="/edit" component={EditTable} />
+            <Route path="/QR" component={QR} />
           </Switch>
         </div>
       </div>
     </Router>
+  );
+}
+
+function LoginFinal() {
+  return (
+    <div>
+      <Login />
+    </div>
   );
 }
 
