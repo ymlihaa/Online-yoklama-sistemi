@@ -1,8 +1,17 @@
 import React, { Component } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { Table, Button, Icon, Tooltip } from "antd";
+import { Table, Button, Icon, Tooltip, Select } from "antd";
 import { BrowserRouter } from "react-router-dom";
 import "./components.css";
+
+const { Option } = Select;
+
+function onChange(value) {
+  console.log(`selected ${value}`);
+  value === "Parmak izi"
+    ? (window.location.href = "/edit")
+    : (window.location.href = "/QR");
+}
 
 const columns = [
   {
@@ -43,7 +52,7 @@ const columns = [
     key: "user_Action",
     render: action => (
       <div>
-        <Button
+        {/* <Button
           type="primary"
           size="large"
           className="login-button"
@@ -54,7 +63,25 @@ const columns = [
             style={{ fontSize: "20px", marginBottom: "5px" }}
           />
           Yoklama Başlat
-        </Button>
+        </Button> */}
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder="YOKLAMA TÜRÜ SEÇİNİZ !"
+          optionFilterProp="children"
+          onChange={onChange}
+          // onFocus={onFocus}
+          // onBlur={onBlur}
+          // onSearch={onSearch}
+          filterOption={(input, option) =>
+            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
+            0
+          }
+        >
+          <Option value="Parmak izi">Parmak İzi</Option>
+          <Option value="QR code">QR Code</Option>
+        </Select>
+        ,
         <Tooltip placement="bottom" title="Yoklamayı durdur!">
           <Button
             type="danger"
