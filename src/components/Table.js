@@ -70,9 +70,6 @@ const columns = [
           placeholder="YOKLAMA TÜRÜ SEÇİNİZ !"
           optionFilterProp="children"
           onChange={onChange}
-          // onFocus={onFocus}
-          // onBlur={onBlur}
-          // onSearch={onSearch}
           filterOption={(input, option) =>
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
             0

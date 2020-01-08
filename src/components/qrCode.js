@@ -4,12 +4,21 @@ const axios = require("axios");
 
 class QR extends Component {
   render() {
-    const url =
-      "ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/start/rollcall";
+    const token = localStorage.getItem("Token");
 
-    axios.get(url).then(obj => {
-      console.log(obj.data);
-    });
+    const model = {
+      classroomId: 9
+    };
+
+    const response = axios.post(
+      "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/start/rollcall?classroomId=10",
+      {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      }
+    );
+    console.log(response);
 
     return (
       <div className="qrCode">
