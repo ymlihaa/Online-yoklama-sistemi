@@ -7,64 +7,38 @@ import { withRouter } from "react-router-dom";
 import teachAvatar from "../teachAvatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Alert } from "antd";
+import Axios from "axios";
+const axios = require("axios");
 
 class Result extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isTrue: true
-    }; /* isTrue : true yaparak tabloyu görüntüleyebilirsiniz.  */
-  }
-
-  // ---ÖNEMLİ--- GÖREV
-  /*
-  open Table Fonksiyonunun yazılma sebebi :
-  Eğerki current state true olursa table'ı göster mantığını çalıştırabilmek içindir.
-  Burada currentState parametresine checkbox componentinde seçim yapıldıktan sonra true değeri atanacaktır.
-  Bunu şu anda yapamadım.
-  İlerlemesi gereken 1 adım .  
-  */
-
-  openTable(currentState) {
-    console.log("true");
-    this.setState({
-      isTrue: currentState
-    });
-  }
-
-  // shadow-lg p-3 mb-5 bg-white rounded
-
   render() {
-    const element =
-      this.state.isTrue === true ? <Table /> : console.log("açma");
+    const TOKEN = localStorage.getItem("TOKEN");
+    const IMG = localStorage.getItem("IMG");
+    const NAME = localStorage.getItem("NAME");
+    const SURNAME = localStorage.getItem("SURNAME");
+    const ID = localStorage.getItem("ID");
 
-    return localStorage.getItem("Token") ? (
+    return TOKEN ? (
       <div className="main-container shadow-lg p-3 mb-5 bg-white rounded">
         <div className="container">
           <div className="image">
             <Image
               width={200}
               height={200}
-              path={this.props.location.state.Url}
+              path={IMG}
               class={" shadow-lg p-3 mb-5 bg-white rounded image"}
             />
           </div>
-          <div className=" checkbox ">
-            <h1 className="text-center">
-              {this.props.location.state.Name.toUpperCase()}{" "}
-              {this.props.location.state.Surname.toUpperCase()}{" "}
-            </h1>
-          </div>
-          <div className="text-center checkbox ">
-            {/* <Checkbox onTableOpen={this.openTable} /> */}
-          </div>
-          {element}
+          <h1 className="text-center">
+            {NAME.toUpperCase()} {SURNAME.toUpperCase()}{" "}
+          </h1>
+          <Table ID={ID} />
           <div className="text-center">
             <button
               type="button"
               className="btn btn-danger"
               onClick={() => {
-                localStorage.removeItem("Token");
+                localStorage.clear();
                 this.props.history.push("/");
               }}
             >

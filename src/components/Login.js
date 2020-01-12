@@ -11,6 +11,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const axios = require("axios");
 
 class NormalLoginForm extends React.Component {
+  addStorage(TOKEN, IMG_URL, NAME, SURNAME, ID) {
+    localStorage.setItem("TOKEN", TOKEN);
+    localStorage.setItem("IMG", IMG_URL);
+    localStorage.setItem("NAME", NAME);
+    localStorage.setItem("SURNAME", SURNAME);
+    localStorage.setItem("ID", ID);
+  }
+
   handleSubmit = async e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -41,15 +49,17 @@ class NormalLoginForm extends React.Component {
             model
           )
           .then(res => {
-            console.log("res", res);
-            localStorage.setItem("Token", res.data.result.jwt);
+            // console.log("res", res);
+            this.addStorage(
+              res.data.result.jwt,
+              res.data.result.userDTO.imageUrl,
+              res.data.result.userDTO.name,
+              res.data.result.userDTO.surname,
+              res.data.result.userDTO.user.id
+            );
             if (res.data.result) {
-              console.log("burada");
-              return this.props.history.push("/result", {
-                Url: res.data.result.userDTO.imageUrl,
-                Name: res.data.result.userDTO.name,
-                Surname: res.data.result.userDTO.surname
-              });
+              console.log("result sayfasına yönlendirmeden 1 satır önce");
+              return this.props.history.push("/result");
             }
           });
       } else {
