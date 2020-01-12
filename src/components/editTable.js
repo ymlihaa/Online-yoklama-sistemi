@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Button, Icon, Tooltip, Tag, Alert } from "antd";
+import { Table, Button, Icon, Tooltip, Tag, Alert, Result } from "antd";
 import "antd/dist/antd.css";
 
 const axios = require("axios");
@@ -186,11 +186,20 @@ class EditTable extends Component {
         }
       />
     ) : (
-      <Alert
-        message="Error"
-        description="This is an error message about copywriting."
-        type="error"
-        showIcon
+      <Result
+        status="403"
+        title="403"
+        subTitle="Sorry, you are not authorized to access this page."
+        extra={
+          <Button
+            type="primary"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          >
+            Back Home
+          </Button>
+        }
       />
     );
   }
