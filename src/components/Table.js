@@ -3,11 +3,8 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Table, Button, Icon, Tooltip, Select } from "antd";
 import { BrowserRouter } from "react-router-dom";
 import "./components.css";
-const axios = require("axios");
-const _ = require("lodash");
 
 const { Option } = Select;
-let arr = [];
 
 function onChange(value) {
   console.log(`selected ${value}`);
@@ -40,6 +37,11 @@ const columns = [
     key: "ders_AKTSKrd"
   },
   {
+    title: "T+U",
+    dataIndex: "ders_TU",
+    key: "ders_TU"
+  },
+  {
     title: "Öğrenci Sayısı",
     dataIndex: "ogr_Count",
     key: "ogr_Count"
@@ -50,6 +52,18 @@ const columns = [
     key: "user_Action",
     render: action => (
       <div>
+        {/* <Button
+          type="primary"
+          size="large"
+          className="login-button"
+          onClick={event => (window.location.href = "/edit")}
+        >
+          <Icon
+            type="play-circle"
+            style={{ fontSize: "20px", marginBottom: "5px" }}
+          />
+          Yoklama Başlat
+        </Button> */}
         <Select
           showSearch
           style={{ width: 200 }}
@@ -80,54 +94,37 @@ const columns = [
   }
 ];
 
-const data = [];
-
-function addTableData(arr, length) {
-  // for (let j = 0; j < length; j++) {
-  //   console.log("indis", j);
-  //   console.log("name: ", arr[j].name);
-  //   console.log("Şube :", arr[j].sectionType);
-  //   console.log("credi:", arr[j].credit);
-  //   console.log("öğrenci sayısı : ", arr[j].studentCount);
-  // }
-  for (let i = 0; i < length; i++) {
-    data.push({
-      key: i,
-      ders_Code: `${arr[i].cod}`,
-      ders_Name: `${arr[i].name}`,
-      ders_Branch: `${arr[i].sectionType}`,
-      ders_AKTSKrd: `${arr[i].credit}`,
-      ogr_Count: `${arr[i].studentCount}`
-    });
-    // console.log(data);
+const data = [
+  {
+    key: 1,
+    ders_Code: "YMH459",
+    ders_Name: "Yazılım Müh. Güncel Konular",
+    ders_Branch: "1",
+    ders_AKTSKrd: "6-4",
+    ders_TU: "3+2",
+    ogr_Count: "60"
+  },
+  {
+    key: 2,
+    ders_Code: "YMH315",
+    ders_Name: "Veritabanı Yönetim Sis.",
+    ders_Branch: "B",
+    ders_AKTSKrd: "6-4",
+    ders_TU: "3+2",
+    ogr_Count: "130"
+  },
+  {
+    key: 3,
+    ders_Code: "YMH403",
+    ders_Name: "Girişimcilik-II",
+    ders_Branch: "1",
+    ders_AKTSKrd: "3-2",
+    ders_TU: "2+0",
+    ogr_Count: "55"
   }
-}
+];
 
 class HomeTable extends Component {
-  getData() {
-    const token = localStorage.getItem("TOKEN");
-    axios
-      .get(
-        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms",
-
-        {
-          headers: { Authorization: "Bearer " + token }
-        }
-      )
-      .then(res => {
-        arr = res.data.result;
-        // console.log(arr.length);
-        addTableData(arr, arr.length);
-      })
-      .catch(err => console.log(err));
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  componentWillUnmount() {}
-
   render() {
     return (
       <Table

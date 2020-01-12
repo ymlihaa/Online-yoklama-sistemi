@@ -1,30 +1,9 @@
 import React, { Component } from "react";
 import { Table, Button, Icon, Tooltip, Tag, Alert } from "antd";
+
 import "antd/dist/antd.css";
 
-const axios = require("axios");
-
 class EditTable extends Component {
-  getData() {
-    const token = localStorage.getItem("TOKEN");
-    axios
-      .get(
-        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms",
-
-        {
-          headers: { Authorization: "Bearer " + token }
-        }
-      )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
   text = tag => (tag === 1 ? "Var" : "Yok");
   color = tag => (tag === 1 ? "green" : "volcano");
   icon = tag =>
@@ -57,8 +36,6 @@ class EditTable extends Component {
   };
 
   render() {
-    const TOKEN = localStorage.getItem("TOKEN");
-
     const columns = [
       {
         title: "Öğrenci No",
@@ -174,7 +151,7 @@ class EditTable extends Component {
       }
     ];
 
-    return TOKEN ? (
+    return localStorage.getItem("Token") ? (
       <Table
         className="shadow-lg p-3 mb-5 bg-white rounded Table"
         columns={columns}

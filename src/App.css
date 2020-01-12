@@ -28,8 +28,7 @@ h1 {
   margin-left: auto;
 }
 
-body {
-
+.main-container-block {
   background: rgb(238, 174, 202);
   background: radial-gradient(
     circle,
@@ -37,4 +36,7 @@ body {
     rgba(148, 187, 233, 1) 100%
   );
 
+  -webkit-box-shadow: 0px 11px 31px 0px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 0px 11px 31px 0px rgba(0, 0, 0, 0.41);
+  box-shadow: 0px 11px 31px 0px rgba(0, 0, 0, 0.41);
 }
