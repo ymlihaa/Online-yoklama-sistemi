@@ -80,30 +80,30 @@ const columns = [
   }
 ];
 
-const data = [];
 
-function addTableData(arr, length) {
-  // for (let j = 0; j < length; j++) {
-  //   console.log("indis", j);
-  //   console.log("name: ", arr[j].name);
-  //   console.log("Şube :", arr[j].sectionType);
-  //   console.log("credi:", arr[j].credit);
-  //   console.log("öğrenci sayısı : ", arr[j].studentCount);
-  // }
-  for (let i = 0; i < length; i++) {
-    data.push({
-      key: i,
-      ders_Code: `${arr[i].cod}`,
-      ders_Name: `${arr[i].name}`,
-      ders_Branch: `${arr[i].sectionType}`,
-      ders_AKTSKrd: `${arr[i].credit}`,
-      ogr_Count: `${arr[i].studentCount}`
-    });
-    // console.log(data);
-  }
-}
 
 class HomeTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data:[]
+    };
+  }
+  addTableData(arr, length) {
+    let xdata=[];
+    for (let i = 0; i < length; i++) {
+      xdata.push({
+        key: i,
+        ders_Code: `${arr[i].cod}`,
+        ders_Name: `${arr[i].name}`,
+        ders_Branch: `${arr[i].sectionType}`,
+        ders_AKTSKrd: `${arr[i].credit}`,
+        ogr_Count: `${arr[i].studentCount}`
+      });
+      this.setState({data:xdata})
+    }
+  }
+  
   getData() {
     const token = localStorage.getItem("TOKEN");
     axios
@@ -117,7 +117,7 @@ class HomeTable extends Component {
       .then(res => {
         arr = res.data.result;
         // console.log(arr.length);
-        addTableData(arr, arr.length);
+        this.addTableData(arr, arr.length);
       })
       .catch(err => console.log(err));
   }
@@ -129,13 +129,14 @@ class HomeTable extends Component {
   componentWillUnmount() {}
 
   render() {
+    console.log(this.state.data);
     return (
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={this.state.data}
         bordered
         title={() => "Aktif Dönemde Verilen Dersler"}
-        footer={() => "Toplam ders sayısı: " + data.length}
+        footer={() => "Toplam ders sayısı: " + this.state.data.length}
       />
     );
   }
