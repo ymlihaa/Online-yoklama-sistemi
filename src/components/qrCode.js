@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import QRCode from "react-google-qrcode";
+import { notification, Alert, Result, Button } from "antd";
+
 const axios = require("axios");
 
 class QR extends Component {
@@ -10,6 +12,14 @@ class QR extends Component {
       message: ""
     };
   }
+
+  openNotification = type => {
+    notification[type]({
+      message: "Kullanıcı Adı yada şifre yanlış !",
+      description: "Kullanıcı Adı yada şifre yanlış !"
+    });
+  };
+
   rollcallFinish() {
     axios
       .post(
@@ -20,7 +30,10 @@ class QR extends Component {
         }
       )
       .then(res => {
-        console.log(res);
+        console.log("bitti", res);
+        // alert("qr code bitti");
+        return this.openNotification("error");
+        window.location.href = "/edit";
       })
       .catch(err => console.log(err));
   }
@@ -53,7 +66,7 @@ class QR extends Component {
     this.rollcallStart();
   }
   render() {
-    return (
+    return localStorage.getItem("TOKEN") ? (
       <div className="qrCode text-center">
         {this.state.qr.length > 0 ? (
           <QRCode data={this.state.qr} size={480} framed />
@@ -67,6 +80,22 @@ class QR extends Component {
           </button>
         </div>
       </div>
+    ) : (
+      <Result
+        status="403"
+        title="403"
+        subTitle="Sorry, you are not authorized to access this page."
+        extra={
+          <Button
+            type="primary"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          >
+            Back Home
+          </Button>
+        }
+      />
     );
   }
 }

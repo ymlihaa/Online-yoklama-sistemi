@@ -4,7 +4,6 @@ import { Table, Button, Icon, Tooltip, Select } from "antd";
 import { BrowserRouter } from "react-router-dom";
 import "./components.css";
 const axios = require("axios");
-const _ = require("lodash");
 
 const { Option } = Select;
 let arr = [];
@@ -80,17 +79,15 @@ const columns = [
   }
 ];
 
-
-
 class HomeTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[]
+      data: []
     };
   }
   addTableData(arr, length) {
-    let xdata=[];
+    let xdata = [];
     for (let i = 0; i < length; i++) {
       xdata.push({
         key: i,
@@ -100,10 +97,10 @@ class HomeTable extends Component {
         ders_AKTSKrd: `${arr[i].credit}`,
         ogr_Count: `${arr[i].studentCount}`
       });
-      this.setState({data:xdata})
+      this.setState({ data: xdata });
     }
   }
-  
+
   getData() {
     const token = localStorage.getItem("TOKEN");
     axios
@@ -116,7 +113,6 @@ class HomeTable extends Component {
       )
       .then(res => {
         arr = res.data.result;
-        // console.log(arr.length);
         this.addTableData(arr, arr.length);
       })
       .catch(err => console.log(err));
@@ -125,8 +121,6 @@ class HomeTable extends Component {
   componentDidMount() {
     this.getData();
   }
-
-  componentWillUnmount() {}
 
   render() {
     console.log(this.state.data);

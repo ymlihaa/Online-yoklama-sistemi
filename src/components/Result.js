@@ -6,11 +6,11 @@ import Checkbox from "./Checkbox";
 import { withRouter } from "react-router-dom";
 import teachAvatar from "../teachAvatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Alert } from "antd";
+import { Alert, Result, Button } from "antd";
 import Axios from "axios";
 const axios = require("axios");
 
-class Result extends Component {
+class ResultPage extends Component {
   render() {
     const TOKEN = localStorage.getItem("TOKEN");
     const IMG = localStorage.getItem("IMG");
@@ -48,14 +48,23 @@ class Result extends Component {
         </div>
       </div>
     ) : (
-      <Alert
-        message="Error"
-        description="This is an error message about copywriting."
-        type="error"
-        showIcon
+      <Result
+        status="403"
+        title="403"
+        subTitle="Sorry, you are not authorized to access this page."
+        extra={
+          <Button
+            type="primary"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+          >
+            Back Home
+          </Button>
+        }
       />
     );
   }
 }
 
-export default Result;
+export default ResultPage;
