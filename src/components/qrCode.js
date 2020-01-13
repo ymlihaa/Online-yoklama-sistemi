@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import QRCode from "react-google-qrcode";
-import { notification, Alert, Result, Button, message } from "antd";
+import { notification, Alert, Result, Button, message, Icon } from "antd";
 
 const axios = require("axios");
 const key = "updatable";
@@ -17,7 +17,8 @@ class QR extends Component {
     super(props);
     this.state = {
       qr: "",
-      message: ""
+      message: "",
+      finish: false
     };
   }
 
@@ -31,10 +32,13 @@ class QR extends Component {
         }
       )
       .then(res => {
+        this.setState({ finish: true });
+
         console.log("bitti", res);
-        this.setState({ qr: "" });
       })
       .catch(err => console.log(err));
+
+    window.location.href = "/QR";
   }
   rollcallStart() {
     this.setState({ message: "Yükleniyor.." });
@@ -63,7 +67,7 @@ class QR extends Component {
                 subTitle="Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
                 extra={
                   <Button type="primary" onClick={this.rollcallFinish}>
-                    Back Home
+                    YOKLAMA GÜNCELLE
                   </Button>
                 }
               />
@@ -86,8 +90,21 @@ class QR extends Component {
               Yoklamayı Bitir
             </button>
           </div>
-        ) : (
+        ) : this.state.finish == false ? (
           <h6>{this.state.message}</h6>
+        ) : (
+          <Result
+            icon={<Icon type="smile" theme="twoTone" />}
+            title="Harika, yoklama başarıyla sonlandırıldı !"
+            extra={
+              <Button
+                type="primary"
+                onClick={() => (window.location.href = "/edit")}
+              >
+                Next
+              </Button>
+            }
+          />
         )}
 
         <div className="col-md-12 text-center"></div>
