@@ -5,13 +5,6 @@ import { notification, Alert, Result, Button, message, Icon } from "antd";
 const axios = require("axios");
 const key = "updatable";
 
-const openMessage = () => {
-  message.loading({ content: "Loading...", key });
-  setTimeout(() => {
-    message.success({ content: "Loaded!", key, duration: 2 });
-  }, 1000);
-};
-
 class QR extends Component {
   constructor(props) {
     super(props);
@@ -63,8 +56,8 @@ class QR extends Component {
             message: (
               <Result
                 status="404"
-                title="QR CODE ÜRETİLEMEDİ !"
-                subTitle="Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
+                title="QR CODE ÜRETİLMEDİ !"
+                subTitle="Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklamayı Bittirin.."
                 extra={
                   <Button type="primary" onClick={this.rollcallFinish}>
                     YOKLAMA GÜNCELLE
