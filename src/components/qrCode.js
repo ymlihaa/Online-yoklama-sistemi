@@ -92,7 +92,10 @@ class QR extends Component {
         {this.state.qr.length > 0 ? (
           <div>
             <QRCode data={this.state.qr} size={480} framed />
-            <button className="btn btn-danger" onClick={this.rollcallFinished}>
+            <button
+              className="yoklamabitir btn btn-danger"
+              onClick={this.rollcallFinished}
+            >
               Yoklamayı Bitir
             </button>
           </div>

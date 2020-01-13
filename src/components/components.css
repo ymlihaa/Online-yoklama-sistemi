@@ -36,7 +36,6 @@
 }
 .container {
   display: block;
-
 }
 
 .login-logo {
@@ -80,4 +79,11 @@
   display: block;
   margin-left: 200px;
   margin-right: 200px;
+}
+
+.yoklamabitir {
+  display: block;
+  margin-top: 8px;
+  margin-right: 150px;
+  margin-left: 100px;
 }
