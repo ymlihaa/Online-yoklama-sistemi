@@ -81,9 +81,25 @@
   margin-right: 200px;
 }
 
-.yoklamabitir {
+/* .yoklamabitir {
   display: block;
   margin-top: 8px;
   margin-right: 150px;
   margin-left: 100px;
+} */
+
+.qrButton {
+  margin-left: 28%;
+  width: 35%;
+  padding: 10px;
+}
+.space {
+  margin-left: 10px;
+  background-color: #1890ff !important;
+  border-color: #1890ff !important;
+}
+
+.qrFinishContainer {
+  padding: 70px 0;
+  text-align: center;
 }

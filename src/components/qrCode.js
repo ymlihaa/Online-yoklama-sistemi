@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import QRCode from "react-google-qrcode";
 import { notification, Alert, Result, Button, message, Icon } from "antd";
+import "./components.css";
 const axios = require("axios");
 
 class QR extends Component {
@@ -92,12 +93,24 @@ class QR extends Component {
         {this.state.qr.length > 0 ? (
           <div>
             <QRCode data={this.state.qr} size={480} framed />
-            <button
-              className="yoklamabitir btn btn-danger"
-              onClick={this.rollcallFinished}
-            >
-              Yoklamayı Bitir
-            </button>
+            <div className="qrButton">
+              <button
+                className=" btn btn-danger"
+                onClick={this.rollcallFinished}
+              >
+                Yoklamayı Bitir
+              </button>
+              <button
+                type="button"
+                className="space btn btn-danger"
+                onClick={() => {
+                  localStorage.clear();
+                  this.props.history.push("/");
+                }}
+              >
+                Log-Out
+              </button>
+            </div>
           </div>
         ) : (
           <h6>{this.state.message}</h6>
