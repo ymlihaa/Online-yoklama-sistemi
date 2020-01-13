@@ -1,0 +1,5 @@
+eklenecekler 
+Þuan result sayfasýnda yoklamayý bitire týklandýðýnda 
+her zaman this.state.message kýsmý yani this.state.finish = true olan kýsým çalýþacak.
+Bunun sebebi yoklamayý bitirmek için rollcallFinish fonksiyonunda finish i true yapmamýz .
+Bunu düzelt 
