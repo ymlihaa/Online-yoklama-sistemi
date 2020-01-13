@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import QR from "./components/qrCode";
+import QrFinish from "./components/qrCodeFinished";
 
 function Home() {
   return (
@@ -20,6 +21,7 @@ function Home() {
             <Route path="/result" component={ResultPage} />
             <Route path="/edit" component={EditTable} />
             <Route path="/QR" component={QR} />
+            <Route path="/QrFinish" component={QrFinish} />
           </Switch>
         </div>
       </div>

@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import QRCode from "react-google-qrcode";
 import { notification, Alert, Result, Button, message, Icon } from "antd";
-
 const axios = require("axios");
-const key = "updatable";
 
 class QR extends Component {
   constructor(props) {
     super(props);
     this.state = {
       qr: "",
-      message: "",
-      finish: false
+      message: ""
     };
+    this.rollcallFinished = this.rollcallFinished.bind(this);
   }
 
   rollcallFinish() {
@@ -25,14 +23,30 @@ class QR extends Component {
         }
       )
       .then(res => {
-        this.setState({ finish: true });
-
+        window.location.href = "/QR";
         console.log("bitti", res);
       })
       .catch(err => console.log(err));
-
-    window.location.href = "/QR";
   }
+
+  rollcallFinished() {
+    axios
+      .post(
+        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/finish/rollcall?classroomId=10",
+        {},
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("TOKEN") }
+        }
+      )
+      .then(res => {
+        console.log("bitti", res);
+        window.location.href = "/QrFinish";
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   rollcallStart() {
     this.setState({ message: "Yükleniyor.." });
     const token = localStorage.getItem("TOKEN");
@@ -65,7 +79,6 @@ class QR extends Component {
                 }
               />
             )
-            // "Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
           });
       });
   }
@@ -79,28 +92,13 @@ class QR extends Component {
         {this.state.qr.length > 0 ? (
           <div>
             <QRCode data={this.state.qr} size={480} framed />
-            <button className="btn btn-danger" onClick={this.rollcallFinish}>
+            <button className="btn btn-danger" onClick={this.rollcallFinished}>
               Yoklamayı Bitir
             </button>
           </div>
-        ) : this.state.finish == false ? (
-          <h6>{this.state.message}</h6>
         ) : (
-          <Result
-            icon={<Icon type="smile" theme="twoTone" />}
-            title="Harika, yoklama başarıyla sonlandırıldı !"
-            extra={
-              <Button
-                type="primary"
-                onClick={() => (window.location.href = "/edit")}
-              >
-                Next
-              </Button>
-            }
-          />
+          <h6>{this.state.message}</h6>
         )}
-
-        <div className="col-md-12 text-center"></div>
       </div>
     ) : (
       <Result
