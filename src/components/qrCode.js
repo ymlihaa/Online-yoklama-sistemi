@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import QRCode from "react-google-qrcode";
-import { notification, Alert, Result, Button } from "antd";
+import { notification, Alert, Result, Button, message } from "antd";
 
 const axios = require("axios");
+const key = "updatable";
+
+const openMessage = () => {
+  message.loading({ content: "Loading...", key });
+  setTimeout(() => {
+    message.success({ content: "Loaded!", key, duration: 2 });
+  }, 1000);
+};
 
 class QR extends Component {
   constructor(props) {
@@ -12,13 +20,6 @@ class QR extends Component {
       message: ""
     };
   }
-
-  openNotification = type => {
-    notification[type]({
-      message: "Kullanıcı Adı yada şifre yanlış !",
-      description: "Kullanıcı Adı yada şifre yanlış !"
-    });
-  };
 
   rollcallFinish() {
     axios
@@ -31,9 +32,7 @@ class QR extends Component {
       )
       .then(res => {
         console.log("bitti", res);
-        // alert("qr code bitti");
-        return this.openNotification("error");
-        window.location.href = "/edit";
+        this.setState({ qr: "" });
       })
       .catch(err => console.log(err));
   }
@@ -57,28 +56,41 @@ class QR extends Component {
         console.log(error.response.status);
         if ((error.response.status = 400))
           this.setState({
-            message:
-              "Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
+            message: (
+              <Result
+                status="404"
+                title="QR CODE ÜRETİLEMEDİ !"
+                subTitle="Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
+                extra={
+                  <Button type="primary" onClick={this.rollcallFinish}>
+                    Back Home
+                  </Button>
+                }
+              />
+            )
+            // "Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklama Bittirin.."
           });
       });
   }
   componentDidMount() {
     this.rollcallStart();
   }
+
   render() {
     return localStorage.getItem("TOKEN") ? (
       <div className="qrCode text-center">
         {this.state.qr.length > 0 ? (
-          <QRCode data={this.state.qr} size={480} framed />
+          <div>
+            <QRCode data={this.state.qr} size={480} framed />
+            <button className="btn btn-danger" onClick={this.rollcallFinish}>
+              Yoklamayı Bitir
+            </button>
+          </div>
         ) : (
           <h6>{this.state.message}</h6>
         )}
 
-        <div className="col-md-12 text-center">
-          <button className="btn btn-danger" onClick={this.rollcallFinish}>
-            Yoklamayı Bitir
-          </button>
-        </div>
+        <div className="col-md-12 text-center"></div>
       </div>
     ) : (
       <Result
