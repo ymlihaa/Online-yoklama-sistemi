@@ -11,50 +11,41 @@ class QR extends Component {
       qr: "",
       message: ""
     };
-    this.rollcallFinished = this.rollcallFinished.bind(this);
+
   }
 
-  rollcallFinish() {
+  rollcallFinish(id) {
+    console.log("rolcalfinish1");
     axios
       .post(
-        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/finish/rollcall?classroomId=10",
+        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/finish/rollcall?classroomId="+`${id}`,
         {},
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("TOKEN") }
         }
       )
       .then(res => {
-        window.location.href = "/QR";
+        window.location.href = "/QR/"+`${id}`;
         console.log("bitti", res);
       })
       .catch(err => console.log(err));
   }
 
-  rollcallFinished() {
-    axios
-      .post(
-        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/finish/rollcall?classroomId=10",
-        {},
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("TOKEN") }
-        }
-      )
-      .then(res => {
-        console.log("bitti", res);
-        window.location.href = "/QrFinish";
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  rollcallFinished(id) {
+    
+    console.log("rolcalfinished");
+    
+    window.location.href = "/edit/"+`${id}`;
+
   }
 
-  rollcallStart() {
+  rollcallStart(id) {
     this.setState({ message: "Yükleniyor.." });
     const token = localStorage.getItem("TOKEN");
 
     axios
       .post(
-        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/start/rollcall?classroomId=10",
+        "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/start/rollcall?classroomId="+`${id}`,
         {},
         { headers: { Authorization: "Bearer " + token } }
       )
@@ -65,6 +56,7 @@ class QR extends Component {
         this.setState({ qr: code });
       })
       .catch(error => {
+        let id= this.props.match.params.id;
         console.log(error.response.status);
         if ((error.response.status = 400))
           this.setState({
@@ -74,7 +66,7 @@ class QR extends Component {
                 title="QR CODE ÜRETİLMEDİ !"
                 subTitle="Bu Yoklama Daha Önce Başlatılmış. Lütfen Yoklamayı Bittirin.."
                 extra={
-                  <Button type="primary" onClick={this.rollcallFinish}>
+                  <Button type="primary" onClick={this.rollcallFinish(id)}>
                     YOKLAMA GÜNCELLE
                   </Button>
                 }
@@ -84,19 +76,20 @@ class QR extends Component {
       });
   }
   componentDidMount() {
-    this.rollcallStart();
+    let id= this.props.match.params.id;
+    this.rollcallStart(id);
   }
 
   render() {
-    return localStorage.getItem("TOKEN") ? (
+    let id= this.props.match.params.id;
+    return ( 
       <div className="qrCode text-center">
-        {this.state.qr.length > 0 ? (
           <div>
             <QRCode data={this.state.qr} size={480} framed />
             <div className="qrButton">
               <button
                 className=" btn btn-danger"
-                onClick={this.rollcallFinished}
+                onClick={()=>this.rollcallFinished(id)}
               >
                 Yoklamayı Bitir
               </button>
@@ -112,27 +105,9 @@ class QR extends Component {
               </button>
             </div>
           </div>
-        ) : (
-          <h6>{this.state.message}</h6>
-        )}
-      </div>
-    ) : (
-      <Result
-        status="403"
-        title="403"
-        subTitle="Sorry, you are not authorized to access this page."
-        extra={
-          <Button
-            type="primary"
-            onClick={() => {
-              window.location.href = "/";
-            }}
-          >
-            Back Home
-          </Button>
-        }
-      />
-    );
+        
+      </div>)
+    
   }
 }
 export default QR;

@@ -5,7 +5,14 @@ import "antd/dist/antd.css";
 const axios = require("axios");
 
 class EditTable extends Component {
-  getData() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data:[]
+    };
+
+  }
+  getData(id) {
     const token = localStorage.getItem("TOKEN");
     axios
       .get(
@@ -22,7 +29,42 @@ class EditTable extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+    let id= this.props.match.params.id;
+    //this.getData(id);
+
+    axios
+    .post(
+      "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/teachers/classrooms/finish/rollcall?classroomId="+`${id}`,
+      {},
+      {
+        headers: { Authorization: "Bearer " + localStorage.getItem("TOKEN") }
+      }
+    )
+    .then(res => {
+      console.log(res);
+      let list=[];
+      res.data.result.inComingStudent.forEach(e => {
+        let x=   {
+          key: e.id,
+          studentNo:e.studentNo,
+          current_State: 1
+        };
+        list.push(x);
+        
+      });
+      res.data.result.nonStudent.forEach(e => {
+        let x=   {
+          key: e.id,
+          studentNo:e.studentNo,
+          current_State: 0
+        };
+        list.push(x);
+      });
+       this.setState({data:list})
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   text = tag => (tag === 1 ? "Var" : "Yok");
@@ -36,12 +78,31 @@ class EditTable extends Component {
         style={{ fontSize: "15px", paddingBottom: "7px" }}
       />
     );
-  button = tag =>
-    tag === 1 ? (
-      <Button type="danger">Yok yaz</Button>
-    ) : (
-      <Button type="primary">Var say</Button>
-    );
+  // button = tag =>
+  //   tag === 1 ? (
+  //     <Button type="danger">Yok yaz</Button>
+  //   ) : (
+  //     <Button type="primary"  onClick={() => {
+  //       axios
+  //       .post(
+  //         "http://ec2-3-15-21-159.us-east-2.compute.amazonaws.com:8080/ymgk-api2/students/manuel",
+  //         {
+  //           "classroomId":9 ,
+  //           "studentId": 2
+  //         },
+  //         {
+  //           headers: { Authorization: "Bearer " + localStorage.getItem("TOKEN") }
+  //         }
+  //       )
+  //       .then(res => {
+  //         console.log(res);
+         
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //     }}>Var say</Button>
+  //   );
 
   /*
    *  Yoklama listesinde imza atan kişilerin sayısı bulundu
@@ -62,39 +123,12 @@ class EditTable extends Component {
     const columns = [
       {
         title: "Öğrenci No",
-        dataIndex: "ogr_No",
-        key: "ogr_No",
-        sorter: (a, b) => a.ogr_No - b.ogr_No,
+        dataIndex: "studentNo",
+        key: "studentNo",
+        sorter: (a, b) => a.studentNo - b.studentNo,
         sortDirections: ["descend", "ascend"]
       },
-      {
-        title: "Adı",
-        dataIndex: "ogr_Name",
-        key: "ogr_Name",
-        sorter: (a, b) => a.ogr_Name.length - b.ogr_Name.length,
-        sortDirections: ["descend", "ascend"]
-      },
-      {
-        title: "Soyadı",
-        dataIndex: "ogr_Surname",
-        key: "ogr_Surname",
-        sorter: (a, b) => a.ogr_Surname.length - b.ogr_Surname.length,
-        sortDirections: ["descend", "ascend"]
-      },
-      {
-        title: "Devamsızlık Durumu",
-        dataIndex: "dvm_Count",
-        key: "dvm_Count",
-        sorter: (a, b) => a.dvm_Count - b.dvm_Count,
-        sortDirections: ["descend", "ascend"]
-      },
-      {
-        title: "Alış",
-        dataIndex: "dvm_State",
-        key: "dvm_State",
-        sorter: (a, b) => a.dvm_State.length - b.dvm_State.length,
-        sortDirections: ["descend", "ascend"]
-      },
+    
       {
         title: "Sınıfta mı?",
         dataIndex: "current_State",
@@ -109,12 +143,12 @@ class EditTable extends Component {
           </span>
         )
       },
-      {
-        title: "İşlem",
-        dataIndex: "current_State",
-        key: "user_Action",
-        render: action => <div>{this.button(action)}</div>
-      }
+      // {
+      //   title: "İşlem",
+      //   dataIndex: "current_State",
+      //   key: "user_Action",
+      //   render: action => <div>{this.button(action)}</div>
+      // }
     ];
 
     const data = [
@@ -178,7 +212,7 @@ class EditTable extends Component {
       <Table
         className="shadow-lg p-3 mb-5 bg-white rounded Table"
         columns={columns}
-        dataSource={data}
+        dataSource={this.state.data}
         bordered
         title={() => "Yazılım müh. Güncel konular aktif yoklama listesi."}
         footer={() =>
@@ -193,9 +227,7 @@ class EditTable extends Component {
         extra={
           <Button
             type="primary"
-            onClick={() => {
-              window.location.href = "/";
-            }}
+           
           >
             Back Home
           </Button>

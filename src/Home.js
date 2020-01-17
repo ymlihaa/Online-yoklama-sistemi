@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import QR from "./components/qrCode";
 import QrFinish from "./components/qrCodeFinished";
+import RollCalls from "./components/RollCalls";
+
 
 function Home() {
   return (
@@ -19,9 +21,11 @@ function Home() {
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/result" component={ResultPage} />
-            <Route path="/edit" component={EditTable} />
-            <Route path="/QR" component={QR} />
+            <Route path="/edit/:id" exact component={EditTable} />
+            
+            <Route path="/QR/:id" exact  component={QR}/> 
             <Route path="/QrFinish" component={QrFinish} />
+            <Route path="/rollcalls/:id" exact  component={RollCalls}/> 
           </Switch>
         </div>
       </div>

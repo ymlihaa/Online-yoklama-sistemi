@@ -8,6 +8,10 @@ import teachAvatar from "../teachAvatar.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Alert, Result, Button } from "antd";
 import Axios from "axios";
+import {
+  BrowserRouter as Router,
+  Route
+ } from 'react-router-dom';
 const axios = require("axios");
 
 class ResultPage extends Component {

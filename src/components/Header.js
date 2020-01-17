@@ -13,7 +13,8 @@ function Header() {
         border: "1px solid rgb(235, 237, 240)"
       }}
       title={
-        <div>
+        <div style={{cursor:"pointer"}}
+        onClick={() => (window.location.href = "/result")}>
           <b>FIRAT</b> ÜNİVERSİTESİ
         </div>
       }
