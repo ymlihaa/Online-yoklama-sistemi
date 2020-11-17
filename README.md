@@ -1,5 +1,2 @@
-# FIRAT ÜNİVERSİTESİ YAZILIM MÜHENDİSLİĞİ GÜNCEL KONULAR DERSİ
-# OKUL İÇİNDE KULLANILAN YOKLAMA SİSTEMİNE ALTERNATİF ;
-# QR KOD DESTEKLİ
-# PARMAK İZİ DESTEKLİ 
-# ONLİNE YOKLAMA SİSTEMİNİN WEB ARAYÜZÜ
+Fırat Üniversitesi yazılım mühendisliği güncel konular dersi için geliştirdiğimiz yoklama kağıdına alternatif dijital sistemin web uygulaması 
+Online yoklama sisteminin web arayüzü 
